@@ -1,4 +1,6 @@
 val jvmTargetVersion = "1.8"
+val kotestVersion = "4.2.0"
+
 
 plugins {
     kotlin("jvm") version "1.4.0"
@@ -15,6 +17,9 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
+    testImplementation("io.kotest:kotest-property-jvm:$kotestVersion")
 }
 
 tasks {
@@ -24,4 +29,8 @@ tasks {
     compileTestKotlin {
         kotlinOptions.jvmTarget = jvmTargetVersion
     }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
